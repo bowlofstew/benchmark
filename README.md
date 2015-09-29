@@ -1,6 +1,8 @@
 benchmark
 =========
 [![Build Status](https://travis-ci.org/google/benchmark.svg?branch=master)](https://travis-ci.org/google/benchmark)
+[![Build status](https://ci.appveyor.com/api/projects/status/u0qsyp7t1tk7cpxs/branch/master?svg=true)](https://ci.appveyor.com/project/google/benchmark/branch/master)
+[![Coverage Status](https://coveralls.io/repos/google/benchmark/badge.svg)](https://coveralls.io/r/google/benchmark)
 
 A library to support the benchmarking of functions, similar to unit-tests.
 
@@ -42,7 +44,8 @@ static void BM_memcpy(benchmark::State& state) {
   memset(src, 'x', state.range_x());
   while (state.KeepRunning())
     memcpy(dst, src, state.range_x());
-  state.SetBytesProcessed(int64_t(state.iterations) * int64_t(state.range_x()));
+  state.SetBytesProcessed(int64_t(state.iterations()) *
+                          int64_t(state.range_x()));
   delete[] src;
   delete[] dst;
 }
